@@ -1,0 +1,195 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background: url("https://th.bing.com/th/id/R.a03fd9c630962271f7a997c0bce8c566?rik=Us9vY1fdKlkTMg&riu=http%3a%2f%2fpa1.narvii.com%2f5579%2fe1e008d9746dbeccf2e0b0af072d68bb47599a7d_hq.gif&ehk=mY287t0NxXBACscQr%2fgKCwe7aplDcSKNppbud8lHigk%3d&risl=&pid=ImgRaw&r=0") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Blooming Tree Animation */
+@keyframes bloom {
+  0% {
+    background: linear-gradient(to right, #91c3ff, transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  100% {
+    background: linear-gradient(to left, #73c0ff, transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 20px 0;
+  animation: bloom 5s ease-in-out infinite alternate;
+  font-weight: bold;
+}
+/* Grid Size Input Box */
+input[type="number"] {
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.1); /* Transparent background */
+  color: #fff; /* White text color */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Subtle border */
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  text-align: center; /* Center-align the text for better appearance */
+}
+
+input[type="number"]::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Subtle placeholder text */
+}
+
+input[type="number"]:focus {
+  background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on focus */
+  border-color: #73c0ff; /* Pinkish border on focus */
+  box-shadow: 0 0 10px #73c0ff(255, 145, 195, 0.5); /* Glow effect */
+}
+
+
+/* Maze Designer Container */
+.maze-designer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1); /* Transparent background for the maze designer */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+/* Controls Section */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Transparent Buttons */
+button {
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.1); /* Transparent background */
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Subtle border */
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
+  border-color: #73c0ff; /* Pinkish border on hover */
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95); /* Shrink effect on click */
+}
+
+/* Labels */
+label {
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* Maze Grid Container */
+.maze-grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Maze Grid */
+.maze-grid {
+  display: grid;
+  gap: 2px;
+  border: 2px solid #ccc;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  background-color: transparent; /* Show the background through cells */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle cell borders */
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.cell.wall {
+  background-color: rgba(50, 50, 50, 0.8); /* Darker color for walls */
+}
+
+.cell:hover {
+  transform: scale(1.1); /* Slight zoom effect */
+  background-color: rgba(163, 196, 247, 0.8); /* Hover effect color */
+}
+
+/* Petals Animation */
+.petals {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; /* Allow clicks to pass through */
+  overflow: hidden; /* Ensure petals do not overflow the body */
+  z-index: 1;
+}
+
+@keyframes petals {
+  0% {
+    transform: translateY(-100vh) rotate(0deg); /* Start above the screen */
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg); /* Fall to the bottom and rotate */
+    opacity: 0;
+  }
+}
+
+.petals .petal {
+  position: absolute;
+  top: -50px;
+  width: 20px;
+  height: 20px;
+  background-color: #73c0ff; /* Petal color */
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: petals linear infinite;
+  animation-duration: 6s; /* Default falling duration */
+  animation-timing-function: ease-in-out;
+}
+
+/* Randomize petal effects */
+.petals .petal:nth-child(odd) {
+  animation-duration: 8s; /* Slower fall */
+  animation-delay: 2s; /* Random delay */
+}
+
+.petals .petal:nth-child(even) {
+  animation-duration: 5s; /* Faster fall */
+  animation-delay: 0s; /* No delay */
+}
+
+.petals .petal {
+  left: var(--random-left); /* Random left position */
+}
